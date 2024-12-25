@@ -70,7 +70,7 @@ body {
     color: rgb(169, 77, 123);
   }
   .room-price{
-    color:darkgoldenrod;
+    color:rgb(194, 156, 60);
     font-family: 'Courier New', Courier, monospace;
     font-size:medium;
   }
@@ -98,8 +98,8 @@ body {
   background-position: center center;
 }
 .header-title {
-  color: #fff;
-  font-size: 4rem;
+  color: #97eef0d7;
+  font-size: 6rem;
   align-content: center;
 }
 
