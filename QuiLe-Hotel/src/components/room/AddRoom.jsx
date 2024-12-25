@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { addRoom } from '../utils/ApiFunctions'
 import RoomTypeSelector from '../common/RoomTypeSelector'
+import { Link } from "react-router-dom"
+
+
 const AddRoom = () => {
 	const[newRoom, setNewRoom] = useState({
 		photo : null,
@@ -36,16 +39,20 @@ const AddRoom = () => {
 		try{
 			const success = await addRoom(newRoom.photo, newRoom.roomType, newRoom.roomPrice)
 			if(success !== undefined){
-				setSuccessMessage("A new room was added to the database")
+				setSuccessMessage("Một phòng mới đã được thêm thành công.")
 				setNewRoom({photo: null, roomType:"", roomPrice: ""})
 				setImagePreview("")
 				setErrorMessage("")
 			}else{
-				setErrorMessage("Error adding room")
+				setErrorMessage("Lỗi khi thêm phòng")
 			}
 		}catch(error){
 			setErrorMessage(error.message)
 		}
+		setTimeout(() => {
+			setSuccessMessage("")
+			setErrorMessage("")
+		}, 3000)
 	}
 	return (
 		<>
@@ -53,7 +60,7 @@ const AddRoom = () => {
 			<div className="row justify-content-center">
 				<div className='col-md-8 col-lg-6'>
 					<h2 className='mt-5 mb-2'>
-						Add a New Room
+						Thêm 1 phòng mới
 					</h2>
 					{successMessage && (
 							<div className="alert alert-success fade show"> {successMessage}</div>
@@ -63,7 +70,7 @@ const AddRoom = () => {
 					<form onSubmit={handleSubmit}>
 						<div className="mb-3">
 							<label htmlFor="roomType" className='form-label'>
-								Room Type
+								Loại phòng
 							</label>
 							<div>
 									<RoomTypeSelector
@@ -75,7 +82,7 @@ const AddRoom = () => {
 
 						<div className="mb-3">
 							<label htmlFor="roomPrice" className='form-label'>
-								Room Price
+								Giá phòng
 							</label>
 							<input
 									required
@@ -90,7 +97,7 @@ const AddRoom = () => {
 
 						<div className='mb-3'>
 							<label htmlFor='photo' className='form-label'>
-								Room Photo
+								Ảnh phòng
 							</label>
 							<input
 									required
@@ -109,8 +116,11 @@ const AddRoom = () => {
 								)}
 						</div>
 						<div className="d-grid gap-2 d-md-flex mt-2">
+						<Link to={"/existing-rooms"} className="btn btn-outline-info">
+									Quay lại danh sách phòng
+								</Link>
 								<button type="submit" className="btn btn-outline-primary ml-5">
-									Save Room
+									Save
 								</button>
 						</div>
 					</form>
