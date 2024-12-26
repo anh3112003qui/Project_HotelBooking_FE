@@ -1,6 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
-
 
 const RoomPaginator = ({ currentPage, totalPages, onPageChange }) => {
 	const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -20,11 +18,5 @@ const RoomPaginator = ({ currentPage, totalPages, onPageChange }) => {
 		</nav>
 	)
 }
-
-RoomPaginator.propTypes = {
-	currentPage: PropTypes.number.isRequired,
-	totalPages: PropTypes.number.isRequired,
-	onPageChange: PropTypes.func.isRequired,
-};
 
 export default RoomPaginator

@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import RoomCard from "../room/RoomCard"
 import { Button, Row } from "react-bootstrap"
 import RoomPaginator from "./RoomPaginator"
-import PropTypes from "prop-types";
-
 
 const RoomSearchResults = ({ results, onClearSearch }) => {
 	const [currentPage, setCurrentPage] = useState(1)
@@ -49,16 +47,5 @@ const RoomSearchResults = ({ results, onClearSearch }) => {
 	)
 }
 
-RoomSearchResults.propTypes = {
-	results: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			photo: PropTypes.string.isRequired,
-			roomType: PropTypes.string.isRequired,
-			roomPrice: PropTypes.number.isRequired,
-		})
-	).isRequired,
-	onClearSearch: PropTypes.func.isRequired,
-};
 
 export default RoomSearchResults

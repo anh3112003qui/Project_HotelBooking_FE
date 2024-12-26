@@ -1,6 +1,4 @@
 import React, { useState } from "react"
-import PropTypes from "prop-types"
-
 
 const RoomFilter = ({ data, setFilteredData }) => {
 	const [filter, setFilter] = useState("")
@@ -46,14 +44,5 @@ const RoomFilter = ({ data, setFilteredData }) => {
 		</div>
 	)
 }
-
-RoomFilter.propTypes = {
-	data: PropTypes.arrayOf(
-		PropTypes.shape({
-			roomType: PropTypes.string,
-		})
-	).isRequired,
-	setFilteredData: PropTypes.func.isRequired,
-};
 
 export default RoomFilter

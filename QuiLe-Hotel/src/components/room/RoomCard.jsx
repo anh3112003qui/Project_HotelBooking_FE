@@ -1,5 +1,4 @@
 import React, { useContext } from "react"
-import PropTypes from "prop-types";
 import { Card, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
@@ -33,14 +32,5 @@ const RoomCard = ({ room }) => {
 		</Col>
 	)
 }
-
-RoomCard.propTypes = {
-	room: PropTypes.shape({
-		id: PropTypes.number.isRequired,
-		photo: PropTypes.string.isRequired,
-		roomType: PropTypes.string.isRequired,
-		roomPrice: PropTypes.number.isRequired, // Change to number if it's a number
-	}).isRequired,
-};
 
 export default RoomCard

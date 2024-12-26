@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
 import { getRoomTypes } from "../utils/ApiFunctions"
 
 const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
@@ -69,13 +68,6 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
             )}
         </>
     )
-}
-
-RoomTypeSelector.propTypes = {
-    handleRoomInputChange: PropTypes.func.isRequired, // Bắt buộc phải có và là hàm
-    newRoom: PropTypes.shape({
-        roomType: PropTypes.string, // roomType phải là chuỗi
-    }).isRequired, // newRoom là bắt buộc
 }
 
 export default RoomTypeSelector

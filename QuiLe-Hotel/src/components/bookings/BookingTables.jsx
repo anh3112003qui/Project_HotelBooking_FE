@@ -1,8 +1,6 @@
 import { parseISO } from "date-fns"
 import React, { useState, useEffect } from "react"
 import DateSlider from "../common/DateSlider"
-import PropTypes from "prop-types";
-
 
 const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
 	const [filteredBookings, setFilteredBookings] = useState(bookingInfo)
@@ -77,25 +75,4 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
 	)
 }
 
-
-BookingsTable.propTypes = {
-	bookingInfo: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.string.isRequired,
-			room: PropTypes.shape({
-				id: PropTypes.string.isRequired,
-				roomType: PropTypes.string.isRequired,
-			}).isRequired,
-			checkInDate: PropTypes.node.isRequired, 
-			checkOutDate:PropTypes.node.isRequired, 
-			guestName: PropTypes.string.isRequired,
-			guestEmail: PropTypes.string.isRequired,
-			numOfAdults: PropTypes.node.isRequired,
-			numOfChildren: PropTypes.node.isRequired,
-			totalNumOfGuests: PropTypes.node.isRequired,
-			bookingConfirmationCode: PropTypes.string.isRequired,
-		})
-	).isRequired,
-	handleBookingCancellation: PropTypes.func.isRequired,
-};
 export default BookingsTable

@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import "react-date-range/dist/styles.css"
 import "react-date-range/dist/theme/default.css"
 import { DateRangePicker } from "react-date-range"
-import PropTypes from "prop-types";
 
 
 const DateSlider = ({ onDateChange, onFilterChange }) => {
@@ -37,10 +36,5 @@ const DateSlider = ({ onDateChange, onFilterChange }) => {
 		</>
 	)
 }
-
-DateSlider.propTypes = {
-	onDateChange: PropTypes.func.isRequired,
-	onFilterChange: PropTypes.func.isRequired,
-};
 
 export default DateSlider
