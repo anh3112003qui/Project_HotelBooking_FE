@@ -12,7 +12,7 @@ const BookingForm = () => {
 	const [errorMessage, setErrorMessage] = useState("")
 	const [roomPrice, setRoomPrice] = useState(0)
 
-const currentUser = localStorage.getItem("userId")
+	const currentUser = localStorage.getItem("userId")
 
 	const [booking, setBooking] = useState({
 		guestFullName: "",
@@ -133,6 +133,7 @@ const currentUser = localStorage.getItem("userId")
 										value={booking.guestEmail}
 										placeholder="Vui lòng nhập email"
 										onChange={handleInputChange}
+										disabled
 									/>
 									<Form.Control.Feedback type="invalid">
 										Mời nhập email của bạn.

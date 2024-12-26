@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import { NavLink, Link } from "react-router-dom"
+import Logout from "../auth/Logout"
 
 
 const NavBar = () => {
@@ -8,6 +9,9 @@ const NavBar = () => {
 	const handleAccountClick = () => {
 		setShowAccount(!showAccount)
 	}
+
+	const isLoggedIn = localStorage.getItem("token")
+	const userRole = localStorage.getItem("userRole")
 
 	return (
 		<nav className="navbar navbar-expand-lg bg-body-tertiary px-5 shadow mt-5 sticky-top">
@@ -34,11 +38,14 @@ const NavBar = () => {
 								Hiện danh sách các phòng
 							</NavLink>
 						</li>
-						<li className="nav-item">
+
+						{isLoggedIn && userRole === "ROLE_ADMIN" && (
+							<li className="nav-item">
 								<NavLink className="nav-link" aria-current="page" to={"/admin"}>
 									Admin
 								</NavLink>
-						</li>
+							</li>
+						)}
 					</ul>
 
 					<ul className="d-flex navbar-nav">
@@ -57,25 +64,19 @@ const NavBar = () => {
 								aria-expanded="false"
 								onClick={handleAccountClick}>
 								{" "}
-								Account
+								Tài khoản
 							</a>					
 							<ul className={`dropdown-menu ${showAccount ? "show" : ""}`}
 								aria-labelledby="navbarDropdown">
+								{isLoggedIn ? (
+									<Logout />
+								) : (
 									<li>
 										<Link className="dropdown-item" to={"/login"}>
 											Đăng nhập
 										</Link>
 									</li>
-                                    <li>
-										<Link className="dropdown-item" to={"/profile"}>
-											Hồ sơ tài khoản
-										</Link>
-									</li>
-                                    <li>
-										<Link className="dropdown-item" to={"/logout"}>
-											Đăng xuất
-										</Link>
-									</li>
+								)}
 							</ul>
 						</li>
 					</ul>
