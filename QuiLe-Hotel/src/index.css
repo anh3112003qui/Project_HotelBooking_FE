@@ -53,16 +53,16 @@ body {
  }
 
   /* Hotel custom color */
-  .card .btn-hotel{
-  background-color: rgb(169, 77, 123);
-  color: #fff;
+  .btn-hotel{
+  background-color: rgb(169, 77, 123) !important;
+  color: #fff !important;
   }
-  .card .btn-hotel:hover{
-  background-color: rgb(137, 127, 132);
-  color: #fff;
-  transition: 0.7s;
-  outline-color: transparent;
-  outline-style:solid;
+  .btn-hotel:hover{
+  background-color: rgb(137, 127, 132) !important;
+  color: #fff !important;
+  transition: 0.7s !important;
+  outline-color: transparent !important;
+  outline-style:solid !important;
 
   }
 
@@ -119,6 +119,24 @@ body {
   margin-top: 50px;
   color: white;
   text-shadow: 2px 2px black;
+}
+
+/* Carousel controls custom styles */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 25px;
+  height: 25px;
+  background-color: rgb(52, 66, 169);  /* Màu nền cho icon */
+  border-radius: 50%;  /* Bo tròn icon */
+  opacity: 0.4;
+}
+
+/* Hiệu ứng hover */
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  opacity: 0.8;
+  background-color: rgb(61, 32, 150);  /* Màu hover giống với nút btn-hotel */
+  transition: 0.5s;  /* Thời gian chuyển màu giống với nút btn-hotel */
 }
 
 .animated {
