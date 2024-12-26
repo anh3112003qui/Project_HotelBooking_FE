@@ -6,29 +6,26 @@ export const api = axios.create({
 
 export const getHeader = () => {
   const token = localStorage.getItem("token");
-  return {
+  return   {
     Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
   };
 };
 
 export async function addRoom(photo, roomType, roomPrice) {
-  const formData = new FormData();
-  formData.append("photo", photo);
-  formData.append("roomType", roomType);
-  formData.append("roomPrice", roomPrice);
+	const formData = new FormData()
+	formData.append("photo", photo)
+	formData.append("roomType", roomType)
+	formData.append("roomPrice", roomPrice)
 
-  const response = await api.post("/rooms/add/new-room", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Accept: "application/json", // Hoặc loại khác mà server yêu cầu
-    },
-  });
-  if (response.status == 201) {
-    return true;
-  } else {
-    return false;
-  }
+	const response = await api.post("/rooms/add/new-room", formData,{
+		headers: getHeader()
+	})
+	if (response.status === 201) {
+		return true
+	} else {
+		return false
+	}
 }
 
 /* This function gets all room types from thee database */
@@ -66,12 +63,14 @@ export async function deleteRoom(roomId) {
 
 /* This function update a room */
 export async function updateRoom(roomId, roomData) {
-  const formData = new FormData();
-  formData.append("roomType", roomData.roomType);
-  formData.append("roomPrice", roomData.roomPrice);
-  formData.append("photo", roomData.photo);
-  const response = await api.put(`/rooms/update/${roomId}`, formData);
-  return response;
+	const formData = new FormData()
+	formData.append("roomType", roomData.roomType)
+	formData.append("roomPrice", roomData.roomPrice)
+	formData.append("photo", roomData.photo)
+	const response = await api.put(`/rooms/update/${roomId}`, formData,{
+		headers: getHeader()
+	})
+	return response
 }
 
 /* This funcction gets a room by the id */
@@ -103,12 +102,14 @@ export async function bookRoom(roomId, booking) {
 
 /* This function gets alll bokings from the database */
 export async function getAllBookings() {
-  try {
-    const result = await api.get("/bookings/all-bookings");
-    return result.data;
-  } catch (error) {
-    throw new Error(`Error fetching bookings : ${error.message}`);
-  }
+	try {
+		const result = await api.get("/bookings/all-bookings", {
+			headers: getHeader()
+		})
+		return result.data
+	} catch (error) {
+		throw new Error(`Error fetching bookings : ${error.message}`)
+	}
 }
 
 /* This function get booking by the cnfirmation code */
@@ -213,3 +214,4 @@ export async function getBookingsByUserId(userId, token) {
     throw new Error("Failed to fetch bookings");
   }
 }
+

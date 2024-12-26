@@ -26,10 +26,11 @@ const DateSlider = ({ onDateChange, onFilterChange }) => {
 		onDateChange(null, null)
 		onFilterChange(null, null)
 	}
+
 	return (
 		<>
 			<h5>Lọc các đặt chỗ theo ngày</h5>
-			<DateRangePicker ranges={[dateRange]} onChange={handleSelect} className="mb-4" />
+			<DateRangePicker ranges={[dateRange]} onChange={handleSelect} className="mb-4"/>
 			<button className="btn btn-secondary" onClick={handleClearFilter}>
 				Xóa lọc
 			</button>

@@ -1,19 +1,26 @@
-import { parseISO } from "date-fns"
 import React, { useState, useEffect } from "react"
 import DateSlider from "../common/DateSlider"
 
 const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
-	const [filteredBookings, setFilteredBookings] = useState(bookingInfo)
-
-	const filterBooknigs = (startDate, endDate) => {
+	const [filteredBookings, setFilteredBookings] = useState(bookingInfo);
+  
+	const convertArrayToDate = (dateArray) => {
+	  // Convert [2024, 12, 25] thành Date object
+	  if (!Array.isArray(dateArray) || dateArray.length !== 3) return null;
+	  return new Date(dateArray[0], dateArray[1] - 1, dateArray[2]); // Trừ 1 vì tháng trong JS bắt đầu từ 0
+	};
+  
+	const filterBookings = (startDate, endDate) => {
 		let filtered = bookingInfo
 		if (startDate && endDate) {
 			filtered = bookingInfo.filter((booking) => {
-				const bookingStarDate = parseISO(booking.checkInDate)
-				const bookingEndDate = parseISO(booking.checkOutDate)
+				const bookingStartDate = convertArrayToDate(booking.checkInDate)
+				const bookingEndDate = convertArrayToDate(booking.checkOutDate)
 				return (
-					bookingStarDate >= startDate && bookingEndDate <= endDate && bookingEndDate > startDate
-				)
+					(bookingStartDate >= startDate && bookingStartDate <= endDate) ||
+					(bookingEndDate >= startDate && bookingEndDate <= endDate) ||
+					(bookingStartDate <= startDate && bookingEndDate >= endDate)
+				  );
 			})
 		}
 		setFilteredBookings(filtered)
@@ -25,7 +32,7 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
 
 	return (
 		<section className="p-4">
-			<DateSlider onDateChange={filterBooknigs} onFilterChange={filterBooknigs} />
+			<DateSlider onDateChange={filterBookings} onFilterChange={filterBookings} />
 			<table className="table table-bordered table-hover shadow">
 				<thead>
 					<tr>
@@ -45,19 +52,20 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
 					</tr>
 				</thead>
 				<tbody className="text-center">
-					{filteredBookings.map((booking, index) => (
-						<tr key={booking.id}>
+				{filteredBookings.length > 0 ? (
+            filteredBookings.map((booking, index) => (
+										<tr key={booking.id}>
 							<td>{index + 1}</td>
 							<td>{booking.id}</td>
 							<td>{booking.room.id}</td>
 							<td>{booking.room.roomType}</td>
-							<td>{booking.checkInDate}</td>
-							<td>{booking.checkOutDate}</td>
+							<td>{booking.checkInDate.join('-')}</td>
+							<td>{booking.checkOutDate.join('-')}</td>
 							<td>{booking.guestName}</td>
 							<td>{booking.guestEmail}</td>
 							<td>{booking.numOfAdults}</td>
 							<td>{booking.numOfChildren}</td>
-							<td>{booking.totalNumOfGuests}</td>
+							<td>{booking.totalNumOfGuest}</td>
 							<td>{booking.bookingConfirmationCode}</td>
 							<td>
 								<button
@@ -67,12 +75,19 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
 								</button>
 							</td>
 						</tr>
-					))}
-				</tbody>
+					))
+				) : (
+					<tr>
+					<td colSpan="13" className="text-center">
+					  Không tìm thấy đặt chỗ nào cho các ngày đã chọn
+					</td>
+				  </tr>
+				)}
+			  </tbody>
 			</table>
-			{filterBooknigs.length === 0 && <p> Không tìm thấy đặt chỗ nào cho các ngày đã chọn</p>}
-		</section>
-	)
-}
+		  </section>
+		);
+	  };
+
 
 export default BookingsTable

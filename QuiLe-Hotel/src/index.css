@@ -53,11 +53,11 @@ body {
  }
 
   /* Hotel custom color */
- .btn-hotel{
+  .card .btn-hotel{
   background-color: rgb(169, 77, 123);
   color: #fff;
   }
-  .btn-hotel:hover{
+  .card .btn-hotel:hover{
   background-color: rgb(137, 127, 132);
   color: #fff;
   transition: 0.7s;
@@ -69,11 +69,23 @@ body {
   .hotel-color{
     color: rgb(169, 77, 123);
   }
+
+  .card .hotel-color{
+    color: rgb(169, 77, 123);
+  }
+
   .room-price{
     color:rgb(194, 156, 60);
     font-family: 'Courier New', Courier, monospace;
     font-size:medium;
   }
+
+  .card .room-price {
+    color: rgb(194, 156, 60);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+  }
+  
   .vertical-rule{
     border-left: '0.5px solid black';
     height: '100vh'

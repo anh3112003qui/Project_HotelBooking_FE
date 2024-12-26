@@ -1,7 +1,5 @@
 import React, { createContext, useState, useContext } from "react"
 import jwt_decode from "jwt-decode"
-import PropTypes from "prop-types"; 
-
 
 export const AuthContext = createContext({
 	user: null,
@@ -34,10 +32,6 @@ export const AuthProvider = ({ children }) => {
 	)
 }
 
-// Thêm PropTypes
-AuthProvider.propTypes = {
-	children: PropTypes.node.isRequired,
-};
 
 export const useAuth = () => {
 	return useContext(AuthContext)
